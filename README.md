@@ -16,7 +16,7 @@ $>\sudo apt-get install git
 
 to clone my repository use this following command
 
-$>\git clone "https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.git"
+$>\git clone https://github.com/EthicalHKRKid/HKCam.git
 
 the above link is also on the right side corner "clone or download"
 
