@@ -42,23 +42,35 @@ $>\ cd Downloads> cp HKCam /root/
 
 $>\ cd ..
 
+Download ngrok file
+
+https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+
+unzip 
+
+on folder Downloads
+
+$>\ unzip ngrok-stable-linux-amd64.zip
+
+$>\ cd Downloads
+
+$>\ cp ngrok /root/HKCam
+
+./ngrok authtoken 1YZoose2YFvN2KMOg0euq7fbddy_7kPs6RtfZxkEwqNmHRZhd 
+
+$>\ cd ..
+
 $>\root>cd HKCam
 
 $>\root>HKCam> ls
 
-camscript.txt       menaminiki.html     trockers.sh
-docker-compose.yml  menaminiki.sh       unblock_trockers_files
-docker-serveo       mokkapostu_files    unblock_trockers.html
-draupathi_files     mokkapostu.html     unblock_trockers.sh
-draupathi.html      mokkapostu.sh       videomemes_files
-draupathi.sh        ngrok               videomemes.html
-funnyfactory_files  post.php            videomemes.sh
-funnyfactory.html   saved.ip.txt        WhatsApp.sh
-funnyfactory.sh     serveo              yaar_paatha_vela_da_ithu_files
-index2.html         serveo-linux-amd64  yaar_paatha_vela_da_ithu.html
-index.php           template.php        yaar_paatha_vela_da_ithu.sh
-ip.php              trockers_files
-menaminiki_files    trockers.html
+camscript.txt       menaminiki.html     menaminiki.sh
+mokkapostu_files    draupathi_files     mokkapostu.html
+draupathi.html      mokkapostu.sh       draupathi.sh 
+ngrok               post.php            saved.ip.txt       
+serveo              index2.html         serveo-linux-amd64
+index.php           template.php        ip.php 
+menaminiki_files
 
 $>\chmod +x *
 
